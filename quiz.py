@@ -33,7 +33,7 @@ guesses = 0
 quiz_fin = False
 while True:
     for i, question in enumerate(questions):
-        print(f"question {i + 1}")
+        print(f"Question {i + 1}")
         print(unescape(question['question']))
         all_answers = []
         all_answers.append(question['correct_answer'])
@@ -51,15 +51,15 @@ while True:
         elif user_answer != correct_num:
             print("you got it wrong try the next question\n")
             guesses += 1
-        print(guesses)
-    quiz_fin = True
-    if guesses == 10:
-
-        if num_correct == 10:
-            print("you got a perfect score good job you try again if wanted")
-        if num_correct < 6 > 10:
-            print("you almost got it you need to get a bit better knowledge in gaming")
-        if num_correct < 1 > 6:
-            print("you didn't get the best score")
-        if num_correct == 0:
-            print("you got none correct")
+        if guesses == 10:
+            quiz_fin = True
+        if quiz_fin == True:
+            if num_correct == 10:
+                print("you got a perfect score good job you try again if wanted")
+            if num_correct < 6 > 10:
+                print("you almost got it you need to get a bit better knowledge in gaming")
+            if num_correct < 1 > 6:
+                print("you didn't get the best score")
+            if num_correct == 0:
+                print("you got none correct")
+    break
