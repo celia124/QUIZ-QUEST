@@ -15,23 +15,22 @@ def get_integer_input(message, error, low, high):
             print(error)
 
 
-
-response = requests.get('https://opentdb.com/api.php?amount=10&category=15')
-
-questions = response.json()['results']
-
-print (''' 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ WELCOME TO THE EPIC GAMER QUIZ MADE FOR GAMERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-''')
-
-num_correct = 0
-guesses = 0
-quiz_fin = False
 while True:
+    response = requests.get('https://opentdb.com/api.php?amount=10&category=15')
+
+    questions = response.json()['results']
+
+    print (''' 
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ WELCOME TO THE EPIC GAMER QUIZ MADE FOR GAMERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ''')
+
+    num_correct = 0
+    guesses = 0
+    quiz_fin = False
     for i, question in enumerate(questions):
         print(f"Question {i + 1}")
         print(unescape(question['question']))
@@ -50,16 +49,17 @@ while True:
             num_correct += 1
         elif user_answer != correct_num:
             print("you got it wrong try the next question\n")
+            print(f"the right answer is {correct_num} ")
             guesses += 1
         if guesses == 10:
             quiz_fin = True
-        if quiz_fin == True:
-            if num_correct == 10:
-                print("you got a perfect score good job you try again if wanted")
-            if num_correct < 6 > 10:
-                print("you almost got it you need to get a bit better knowledge in gaming")
-            if num_correct < 1 > 6:
-                print("you didn't get the best score")
-            if num_correct == 0:
-                print("you got none correct")
+    if quiz_fin == True:
+        if num_correct == 10:
+            print("you got a perfect score good job you try again if wanted")
+        if num_correct < 6 > 10:
+            print("you almost got it you need to get a bit better knowledge in gaming")
+        if num_correct < 1 > 6:
+            print("you didn't get the best score")
+        if num_correct == 0:
+            print("you got none correct")
     break
