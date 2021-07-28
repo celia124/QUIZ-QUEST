@@ -16,7 +16,7 @@ def get_integer_input(message, error, low, high):
 
 
 while True:
-    response = requests.get('https://opentdb.com/api.php?amount=10&category=15')
+    response = requests.get('https://opentdb.com/api.php?amount=10&category=15&type=multiple')
 
     questions = response.json()['results']
 
@@ -30,7 +30,7 @@ while True:
 
     num_correct = 0
     guesses = 0
-    quiz_fin = False
+    #this bit is a little confusing for me but its how the questions get in order and which one is correct.
     for i, question in enumerate(questions):
         print(f"Question {i + 1}")
         print(unescape(question['question']))
@@ -42,18 +42,21 @@ while True:
         for num, ans in enumerate(all_answers):
             print(f"{num+1}: {unescape(ans)}")
         correct_num = all_answers.index(question['correct_answer']) + 1
-        user_answer = get_integer_input("Write a number between 1 and 4 to get the answer\n", "that is not one of the options", 0, 5)
+        user_answer = get_integer_input("Write a number between 1 and 4 to get the answer ", "that is not one of the options", 0, 5)
+        #this is the area that says if you got it wrong or right it's pretty simple but does the job
         if user_answer == correct_num:
-            print("you got the right answer\n")
+            print("you got the right answer")
+            print(f"the right answer is {correct_num}\n")
             guesses += 1
             num_correct += 1
         elif user_answer != correct_num:
             print("you got it wrong try the next question\n")
-            print(f"the right answer is {correct_num} ")
+            print(f"the right answer is {correct_num}\n")
             guesses += 1
-        if guesses == 10:
-            quiz_fin = True
-    if quiz_fin == True:
+        print(guesses)
+        print(num_correct)
+    # i am trying to make a finishing question thing that tells you your score once you're done
+    if guesses == 10:
         if num_correct == 10:
             print("you got a perfect score good job you try again if wanted")
         if num_correct < 6 > 10:
