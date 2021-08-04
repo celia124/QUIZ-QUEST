@@ -3,7 +3,6 @@ import random
 from html import unescape
 from random import choice
 import time
-
 def get_integer_input(message, error, low, high):
     ''' '''
     while True:
@@ -22,7 +21,6 @@ def get_questions(difficulty):
         #something something something
     #blah
         pass
-
 
     return questions
 
@@ -45,8 +43,6 @@ while True:
 
     questions3 = response_hard.json()['results']
 
-     # TODO clean this up
-
 
     print (''' 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,11 +61,9 @@ while True:
         questions = questions3
     if gamemode == 4:
         questions = questions4
-    gamemode1 = get_integer_input("Do you want a normal game, timed or speed rounds \n Type 1 for normal \n Type 2 for timed \n Type 3 speed rounds\n", "That is not an option", 0,4)
+    gamemode1 = get_integer_input("Do you want a Normal game, Timed \n Type 1 for Normal \n Type 2 for Timed \n", "That is not an option", 0,3)
     if gamemode1 == 2:
         start = time.time()
-    if gamemode1 == 3:
-        break
     num_correct = 0
     guesses = 0
     #this bit is a little confusing for me but its how the questions get in order and which one is correct.
@@ -100,7 +94,8 @@ while True:
     if guesses == 10:
         percent = num_correct * guesses
         print(f"~~~~~~~~~~~~~~~~You finished the quiz good job~~~~~~~~~~~~~~~~~~~~~ \nYou anwsered {percent}% of questions right")
-        print(f"You finished in {round(end-start,1)} seconds")
+        if gamemode1 == 2:
+            print(f"You finished in {round(end-start,1)} seconds")
         if percent == 100:
             print("You got a perfect score")
         elif percent < 50 > 100:
